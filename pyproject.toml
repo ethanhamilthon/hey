@@ -1,0 +1,27 @@
+[project]
+name = "heyai"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Ethan Hamilthon",email = "yerbolyerdana@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "openai (>=1.73.0,<2.0.0)",
+    "google-genai (>=1.10.0,<2.0.0)",
+    "rich (>=14.0.0,<15.0.0)",
+    "pydantic (>=2.11.3,<3.0.0)",
+]
+
+[tool.poetry.scripts]
+hey = "heyai.main:main"
+dev = "heyai.dev:main"
+
+[tool.poetry]
+packages = [{include = "heyai", from = "src"}]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
