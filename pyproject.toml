@@ -16,7 +16,6 @@ dependencies = [
 
 [tool.poetry.scripts]
 hey = "heyai.main:main"
-dev = "heyai.dev:main"
 
 [tool.poetry]
 packages = [{include = "heyai", from = "src"}]

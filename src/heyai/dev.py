@@ -3,6 +3,10 @@ from rich.markdown import Markdown
 from rich.panel import Panel
 from rich import box
 
+"""
+It is file to test some things
+"""
+
 MARKDOWN_DATA = """
 # My Awesome Function
 
@@ -30,3 +34,7 @@ def main():
     md = Markdown(MARKDOWN_DATA, code_theme="dracula")
     panel = Panel(md, padding=(1, 4), box=box.HORIZONTALS)
     console.print(panel)
+
+
+if __name__ == "__main__":
+    main()
