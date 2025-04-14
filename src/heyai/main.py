@@ -9,7 +9,7 @@ from rich.live import Live
 
 from core.chat import ChatProvider
 from heyai.system import SYSTEM_PROMPT
-from shared.history import ChatHistory, ChatMessage, history_from_file, history_to_file
+from shared.history import ChatHistory, ChatMessage, load_history, save_history
 
 
 def get_gemini_key():
@@ -22,14 +22,6 @@ def get_gemini_key():
     return key
 
 
-def get_history_path():
-    """
-    Get the path to the history file
-    """
-    home = os.path.expanduser("~")
-    return os.path.join(home, ".heyai/history.json")
-
-
 def main():
     # get api key
     key = get_gemini_key()
@@ -38,7 +30,7 @@ def main():
         return
 
     # load json history
-    chat_history = history_from_file(get_history_path())
+    chat_history = load_history()
     if not chat_history:
         print("Some error occurred while loading history")
         return
@@ -55,7 +47,7 @@ def main():
         print("New conversation")
         chat_history = ChatHistory(messages=[])
         if len(sys.argv) == 2:
-            history_to_file(chat_history, get_history_path())
+            save_history(chat_history, True)
             return
         else:
             text = " ".join(sys.argv[2:])
@@ -78,7 +70,7 @@ def main():
 
     # save json history
     chat_history.messages.append(ChatMessage(role="assistant", content=buffer))
-    history_to_file(chat_history, get_history_path())
+    save_history(chat_history, False)
 
 
 if __name__ == "__main__":
